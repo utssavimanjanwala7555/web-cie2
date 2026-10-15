@@ -1,0 +1,128 @@
+@model HospitalAppointmentManagement.Models.Doctor
+
+@{
+    ViewData["Title"] = "Doctor Details";
+}
+
+<h2 class="mb-4">Doctor Details</h2>
+
+
+     PATIENT NAME FROM COOKIE
+@if (ViewBag.PatientName != null)
+{
+    <div class="alert alert-info">
+        <strong>Patient Name:</strong>
+        @ViewBag.PatientName
+    </div>
+}
+
+
+   //  SUCCESS MESSAGE
+  
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Message"]
+    </div>
+}
+
+
+
+    // DOCTOR INFORMATION
+  
+
+<div class="card mb-4">
+
+    <div class="card-header">
+        <h4>@Model.DoctorName</h4>
+    </div>
+
+    <div class="card-body">
+
+        <p>
+            <strong>Doctor ID:</strong>
+            @Model.DoctorId
+        </p>
+
+        <p>
+            <strong>Doctor Name:</strong>
+            @Model.DoctorName
+        </p>
+
+        <p>
+            <strong>Specialization:</strong>
+            @Model.Specialization
+        </p>
+
+        <p>
+            <strong>Experience:</strong>
+            @Model.Experience years
+        </p>
+
+        <p>
+            <strong>Consultation Fee:</strong>
+            ₹@Model.ConsultationFee
+        </p>
+
+        <p>
+            <strong>Service Charge:</strong>
+            ₹100
+        </p>
+
+        <hr />
+
+        <p>
+            <strong>Total Consultation Charge:</strong>
+
+            <span class="text-success">
+                ₹@ViewBag.TotalCharge
+            </span>
+        </p>
+
+    </div>
+</div>
+  //   APPOINTMENT FORM
+
+<h3>Request Appointment</h3>
+
+<form asp-controller="Doctor"
+      asp-action="BookAppointment"
+      method="post">
+
+    <!-- Hidden Field: DoctorId -->
+
+    <input type="hidden"
+           name="DoctorId"
+           value="@Model.DoctorId" />
+
+
+    <!-- Patient Name -->
+
+    <div class="mb-3">
+
+        <label for="PatientName"
+               class="form-label">
+
+            Patient Name
+
+        </label>
+
+        <input type="text"
+               id="PatientName"
+               name="PatientName"
+               class="form-control"
+               placeholder="Enter patient name"
+               required />
+
+    </div>
+
+
+    <!-- Submit Button -->
+
+    <button type="submit"
+            class="btn btn-success">
+
+        Book Appointment
+
+    </button> </form>

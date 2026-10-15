@@ -1,0 +1,42 @@
+@model List<HospitalAppointmentManagement.Models.Doctor>
+
+@{
+    ViewData["Title"] = "Doctors";
+}
+
+<h2>Doctor List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Doctor ID</th>
+            <th>Doctor Name</th>
+            <th>Specialization</th>
+            <th>Experience</th>
+            <th>Consultation Fee</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var doctor in Model)
+        {
+            <tr>
+                <td>@doctor.DoctorId</td>
+                <td>@doctor.DoctorName</td>
+                <td>@doctor.Specialization</td>
+                <td>@doctor.Experience years</td>
+                <td>₹@doctor.ConsultationFee</td>
+                <td>
+                    <a asp-controller="Doctor"
+                       asp-action="Details"
+                       asp-route-DoctorId="@doctor.DoctorId"
+                       class="btn btn-primary">
+                        View Details
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
